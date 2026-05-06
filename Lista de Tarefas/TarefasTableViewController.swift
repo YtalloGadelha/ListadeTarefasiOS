@@ -17,7 +17,6 @@ class TarefasTableViewController: UITableViewController {
     }
     
     func atualizarListaTarefas() {
-        
         let tarefa = TarefaUserDefaults()
         tarefas = tarefa.listar()
         tableView.reloadData()
@@ -30,15 +29,12 @@ class TarefasTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return tarefas.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -46,6 +42,11 @@ class TarefasTableViewController: UITableViewController {
         celula.textLabel?.text = tarefas[indexPath.row]
 
         return celula
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
  
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -54,7 +55,9 @@ class TarefasTableViewController: UITableViewController {
             
             let tarefa = TarefaUserDefaults()
             tarefa.remover(indice: indexPath.row)
-            atualizarListaTarefas()
+            tarefas.remove(at: indexPath.row)
+            tableView.reloadData()
+            
         }
     }
 }

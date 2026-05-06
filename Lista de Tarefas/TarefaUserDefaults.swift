@@ -13,6 +13,17 @@ class TarefaUserDefaults {
     let chave = "listaTarefas"
     var tarefas: [String] = []
     
+    func listar() -> Array<String>{
+        
+       let dados = UserDefaults.standard.object(forKey: chave)
+        
+        if dados != nil{
+            return dados as! Array<String>
+        }else{
+            return []
+        }
+    }
+    
     func salvar(tarefa:String){
         
         //recuperar tarefas
@@ -34,14 +45,4 @@ class TarefaUserDefaults {
         
     }
     
-    func listar() -> Array<String>{
-        
-       let dados = UserDefaults.standard.object(forKey: chave)
-        
-        if dados != nil{
-            return dados as! Array<String>
-        }else{
-            return []
-        }
-    }
 }

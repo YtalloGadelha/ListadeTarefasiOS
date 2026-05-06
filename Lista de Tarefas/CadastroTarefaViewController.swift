@@ -12,9 +12,19 @@ class CadastroTarefaViewController: UIViewController {
 
     @IBOutlet weak var tarefaCampo: UITextField!
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tarefaCampo.layer.cornerRadius = 10
+        tarefaCampo.layer.masksToBounds = true
+    }
+
     @IBAction func adicionarTarefa(_ sender: Any) {
         
-        if let textoDigitado = tarefaCampo.text{
+        if let textoDigitado = tarefaCampo.text, !textoDigitado.isEmpty{
             
             let tarefa = TarefaUserDefaults()
             tarefa.salvar(tarefa: textoDigitado)
@@ -22,26 +32,5 @@ class CadastroTarefaViewController: UIViewController {
             
         }
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
